@@ -62,6 +62,17 @@ class GameField:
         for r, c in positions:
             self.grid[r][c] = None
 
+    def apply_gravity(self):
+        for c in range(self.width):
+            # Collect non-None cells in column
+            cells = [self.grid[r][c] for r in range(self.height) if self.grid[r][c] is not None]
+            # Place from bottom up
+            for r in range(self.height - 1, -1, -1):
+                if cells:
+                    self.grid[r][c] = cells.pop()
+                else:
+                    self.grid[r][c] = None
+
 class Game:
     def __init__(self, width, height, bricks):
         self.field = GameField(width, height)
