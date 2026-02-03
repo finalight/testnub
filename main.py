@@ -35,6 +35,7 @@ def game_loop(game):
             matches = game.field.find_matches()
             if matches:
                 game.field.clear_matches(matches)
+                game.field.apply_gravity()  # Apply gravity after clearing
             # Next brick
             game.current_brick_index += 1
             if game.current_brick_index < len(game.brick_queue):
